@@ -1,7 +1,7 @@
 //connection to mySQL
 var mysql = require("mysql");
 
-//looks like jawsdb will be used with heroku
+//jaws db or use local
 if (process.env.JAWSDB_URL){
 	connection = mysql.createConnection(process.env.JAWSDB_URL);
 } else {
@@ -9,7 +9,7 @@ if (process.env.JAWSDB_URL){
 		port: 3306,
 		host: "localhost",
 		user: "root",
-		password:"",
+		password:"Rh73032!",
 		database: "burgers_db"
 	});
 };
@@ -20,8 +20,8 @@ connection.connect(function(err){
 		console.errp("error connecting: " + err.stack);
 		return;
 	}
-	console.log("connected as id " + connection.threadID); 
 });
 
 //export connection
 module.exports = connection;
+

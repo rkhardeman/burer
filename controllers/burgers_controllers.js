@@ -19,17 +19,23 @@ router.post("/", function (req, res){
 	});
 });
 
-router.put("/:id",function (req,res){
-
-    var condition = "id = " + req.params.id;
-
-    console.log("condition", condition);
-
-  burger.update({"devoured": req.body.devoured}, condition, function (data){
-
-      res.redirect("/");
+router.post('/burger/eat/:id', function (req, res) {
+  burger.updateOne(req.params.id, function() {
+    res.redirect('/');
   });
 });
+
+// router.put("/:id",function (req,res){
+
+//     var condition = "id = " + req.params.id;
+
+//     console.log("condition", condition);
+
+//   burger.update({"devoured": req.body.devoured}, condition, function (data){
+
+//       res.redirect("/");
+//   });
+// });
 
 // Export routes for server.js to use.
 module.exports = router;
