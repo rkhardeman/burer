@@ -1,47 +1,41 @@
-var connection = require("../config/connection.js");
 
-function questions (num){
-	var arr = [];
-	for (var i=0; i<num; i++){
-		arr.push("?");
-	}
-	return arr.toString();
-}
+var connection = require("./connection.js");
 
-function objToSql(ob){
-	var arr = [];
-	for (var key in ob){
-		arr.push(key + "=" + ob[key]);
-	};
-	return arr.toString();
-}
+connection.connect(function(err) {
+  if (err) {
+    console.error('error: ' + err.stack);
+    return;
+  };
+  console.log('connected as: ' + connection.threadId);
+});
 
 var orm = {
-	all: function (tableInput, cb){
-		var queryString = "SELECT * FROM " + tableInput;
-		connection.query(queryString, function (err,result){
-			if(err){
-				throw err;
-			}
-			cb(result);
-		})
-	},
+    selectAll: function(cb) {
+      var query = "SELECT * FROM burgers"
+      connection.query(query, function(err, result) {
+        if (err) throw err;
+        cb(result);
+      });
+    },
 
-	create: function(table, cols, vals, cb){
-		var queryString  = "INSERT INTO " + table;
-		queryString += " SET ";
-        queryString += objToSql(objColVals);
-        queryString += " WHERE ";
-        queryString += condition;
+    insertOne: function(burger_name, cb) {
+      var query = "INSERT INTO burgers SET ?"
+      connection.query(query, {
+        burger_name: burger_name,
+        devoured: false
+      }, function(err, result) {
+        if (err) throw err;
+        cb(result);
+      });
+    },
 
-        console.log(queryString);
-        connection.query(queryString, function(err, result) {
-            if (err) {
-                throw err;
-            }
-            cb(result);
-		});
-	}
+    updateOne: function(burgerID, cb) {
+      var query = "UPDATE burgers SET ? WHERE ?";
+      connection.query(query, [ {devoured: true}, {id: burgerID} ], function(err, result) {
+        if (err) throw err;
+        cb(result);
+      });
+    }
 };
 
 module.exports = orm;

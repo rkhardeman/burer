@@ -7,13 +7,11 @@
 .lead {
     color: orangered;
     text-align: center;
-    font-family: 'Homemade Apple', cursive;
 }
 
 body{
    background-color: dodgerblue;
     background-size: 100%;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 14px;
     line-height: 1.42857143;
     color: #333;
@@ -29,7 +27,6 @@ img{
 }
 
 h2{
-    font-family: 'Luckiest Guy', cursive;
     -webkit-transform: rotate(-7deg); /* Chrome, Safari, Opera */
     transform: rotate(-7deg);
 }
@@ -37,5 +34,4 @@ h2{
 .enter{
     text-align: center;
     color: #333333;
-    font-family: 'Glegoo', serif;
 }
